@@ -17,13 +17,16 @@ class NegociacaoController {
     // cancelando a submissão do formulário
     event.preventDefault();
 
-    let data = new Date(...this._inputData
-      .value.split('-')
-      .map(function(item, indice) {
-        return item - indice % 2;
-      })
+    let negociacao = new Negociacao(
+      DateConverter.paraData(this._inputData.value),
+      parseInt(this._inputQuantidade.value),
+      parseFloat(this._inputValor.value)
     );
-    console.log(data);
-  
+
+    console.log(negociacao.data);
+
+    let diaMesAno = DateConverter.paraTexto(negociacao.data);
+
+    console.log(diaMesAno);
   }
 }
