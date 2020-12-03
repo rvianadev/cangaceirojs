@@ -2,13 +2,11 @@ class NegociacaoController {
 
   constructor() {
     
-    // realizando o bind, $ mantém document como seu contexto this
     let $ = document.querySelector.bind(document);
-
-    // buscando os elementos
     this._inputData = $('#data');
     this._inputQuantidade = $('#quantidade');
     this._inputValor = $('#valor');
+    this._negociacoes = new Negociacoes();
   }
 
 
@@ -17,16 +15,28 @@ class NegociacaoController {
     // cancelando a submissão do formulário
     event.preventDefault();
 
-    let negociacao = new Negociacao(
+    // inclui a negociacao
+    this._negociacoes.adiciona(this._criaNegociacao());
+
+    // imprime a lista com o novo elemento
+    console.log(this._negociacoes.paraArray());
+    this._limpaFormulario();
+  }
+
+  _limpaFormulario() {
+
+    this._inputData.value = '';
+    this._inputQuantidade.value = 1;
+    this._inputValor.value = 0.0;
+    this._inputData.focus();
+  }
+
+  _criaNegociacao() {
+
+    return new Negociacao(
       DateConverter.paraData(this._inputData.value),
       parseInt(this._inputQuantidade.value),
       parseFloat(this._inputValor.value)
-    );
-
-    console.log(negociacao.data);
-
-    let diaMesAno = DateConverter.paraTexto(negociacao.data);
-
-    console.log(diaMesAno);
+    ); 
   }
 }
