@@ -19,7 +19,6 @@ class NegociacaoController {
     this._negociacoes.adiciona(this._criaNegociacao());
 
     // imprime a lista com o novo elemento
-    console.log(this._negociacoes.paraArray());
     this._limpaFormulario();
   }
 
