@@ -8,19 +8,15 @@ class NegociacaoController {
     this._inputValor = $('#valor');
     this._negociacoes = new Negociacoes();
     this._negociacoesView = new NegociacoesView('#negociacoes');
-    this._negociacoesView.update();
+    this._negociacoesView.update(this._negociacoes);
   }
 
 
   adiciona(event) {
     
-    // cancelando a submissão do formulário
     event.preventDefault();
-
-    // inclui a negociacao
     this._negociacoes.adiciona(this._criaNegociacao());
-
-    // imprime a lista com o novo elemento
+    this._negociacoesView.update(this._negociacoes);
     this._limpaFormulario();
   }
 
